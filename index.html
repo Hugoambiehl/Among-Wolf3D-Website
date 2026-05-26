@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Among Wolf 3D</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-transition"></div>
+
+    <header class="navbar fade-in delay-1">
+        <div class="logo">AMONG WOLF 3D</div>
+        <nav>
+            <a href="#features">Fonctionnalités</a>
+            <button onclick="openModal('loreModal')" class="nav-btn">Le Lore</button>
+            <button onclick="openModal('downloadModal')" class="btn-outline">Télécharger</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <video class="hero-video" autoplay loop muted playsinline>
+                <source src="assets/gameplay.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas les vidéos HTML5.
+            </video>
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content fade-in delay-2">
+                <h1>Survivez au Labyrinthe.</h1>
+                <p>Un FPS rétro survolté développé en C de zéro. Plongez dans l'action, affrontez vos ennemis et trouvez la sortie.</p>
+                <div class="hero-buttons">
+                    <button onclick="openModal('downloadModal')" class="btn-primary">Télécharger le Jeu</button>
+                    <button onclick="openModal('loreModal')" class="btn-secondary">En savoir plus</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section reveal-on-scroll">
+            <h2>Fonctionnalités Principales</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Moteur Raycasting Custom</h3>
+                    <p>Moteur 3D codé entièrement en C avec la CSFML, incluant textures, billboarding et Z-buffer.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Éclairage Dynamique</h3>
+                    <p>Système de lampe torche en temps réel pour explorer les zones les plus sombres de la carte.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Système de Sauvegarde</h3>
+                    <p>Ne perdez jamais votre progression grâce à un système de sauvegarde binaire ultra-rapide.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 - Projet Epitech. Développé avec passion.</p>
+    </footer>
+
+    <div id="downloadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('downloadModal')">&times;</span>
+            <h2>Sélectionnez votre OS</h2>
+            <p>Choisissez votre système d'exploitation pour lancer le téléchargement.</p>
+            <div class="os-grid">
+                <div class="os-card" onclick="startDownloadFlow('windows')" style="cursor: pointer;">
+                    <div class="os-icon">🪟</div>
+                    <h3>Windows</h3>
+                    <span>.zip (64-bit)</span>
+                </div>
+                <div class="os-card disabled">
+                    <div class="os-icon">🐧</div>
+                    <h3>Linux</h3>
+                    <span>Bientôt disponible</span>
+                </div>
+                <div class="os-card disabled">
+                    <div class="os-icon">🍎</div>
+                    <h3>macOS</h3>
+                    <span>Bientôt disponible</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('donationModal')">&times;</span>
+            <div class="project-icon">🐺</div>
+            <h2>Soutenir Among Wolf 3D</h2>
+            <p>Ce jeu est le fruit de plusieurs mois de développement et est proposé <strong>100% gratuitement</strong>.</p>
+            <p>Si vous souhaitez soutenir mon travail et participer au financement du développement futur du projet, vous pouvez faire une contribution libre sur la cagnotte officielle.</p>
+            
+            <div class="donation-actions">
+                <a href="https://www.lepotcommun.fr/cagnotte/solidaire/soutien-pour-le-jeu-among-wolf-3d-t61r1guo" target="_blank" class="btn-project-fund">Participer à la cagnotte</a>
+                <button onclick="proceedToDownload()" class="btn-secondary">Non merci, lancer le téléchargement</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="progressModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('progressModal')">&times;</span>
+            <div class="spinner"></div>
+            <h2>Téléchargement en cours...</h2>
+            <p>Merci d'avoir téléchargé Among Wolf 3D ! Préparez-vous à survivre.</p>
+            
+            <div class="fallback-download">
+                <p>Si le téléchargement ne se lance pas automatiquement d'ici quelques secondes :</p>
+                <a href="#" id="fallbackLink" class="btn-outline" download>Cliquez ici pour forcer le téléchargement</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="loreModal" class="modal">
+        <div class="modal-content large">
+            <span class="close-btn" onclick="closeModal('loreModal')">&times;</span>
+            <h2>Le Lore & Trailer</h2>
+            <div class="lore-container">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/0YKjFoGxbec?si=jcwHJ-nZ6MulM7pz" title="Trailer Among Wolf 3D" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="lore-text">
+                    <p><strong>Année 2026.</strong> Une expérience gouvernementale classifiée a horriblement mal tourné.</p>
+                    <p>Vous vous réveillez dans les entrailles du complexe souterrain "Skeld", sans aucun souvenir de la manière dont vous y êtes arrivé. Armé seulement de votre couteau et d'une lampe torche capricieuse, vous devez naviguer à travers des couloirs labyrinthiques infestés d'abominations issues de l'expérience.</p>
+                    <p>Votre seul objectif : trouver la sortie avant que l'obscurité ne vous engloutisse.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
